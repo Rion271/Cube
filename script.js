@@ -9,7 +9,7 @@
         let isRightMouseDown = false;
         let mouseX = 0, mouseY = 0;
         let leftDragStart = null;
-        let cameraAngleX = 0.5, cameraAngleY = 0.8;
+        let cameraAngleX = 0.65, cameraAngleY = 0.8;
         let cameraRadius = 7;
 
         const raycaster = new THREE.Raycaster();
@@ -192,7 +192,7 @@
         }
 
         function resetCamera() {
-            cameraAngleX = 0.5;
+            cameraAngleX = 0.65;
             cameraAngleY = 0.8;
             updateCameraPosition();
         }
