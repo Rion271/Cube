@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3x3 Rubik's Cube Project TIK</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Memuat Pustaka Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <!-- Area Kanvas 3D Rubik -->
+        <div id="canvas-container">
+            <!-- Modal Omedettou dipasang overlay di atas kanvas -->
+            <div id="win-modal">
+                <div class="modal-content">
+                    <h1>Omedetou! 🎉</h1>
+                    <p>Selamat! Rubik berhasil diselesaikan.</p>
+                    <div class="win-stats" id="win-stats-container">
+                        <div>Waktu: <b id="win-time">00:00</b></div>
+                        <div style="margin-top: 8px;">Langkah: <b id="win-steps">0</b></div>
+                    </div>
+                    <button class="modal-btn" onclick="closeWinModal()">Main Lagi</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel Kontrol Samping (Sidebar) -->
+        <div id="sidebar">
+            <h2>Rubik's Cube 3x3</h2>
+            <p class="desc">Project TIK Simulasi Permainan Rubik 3 Dimensi interaktif dengan HTML, CSS, dan JavaScript.</p>
+
+            <!-- Mode Selector Baru -->
+            <div class="mode-tabs">
+                <button id="btn-mode-1" class="mode-tab active" onclick="setMode(1)">Mode 1: Belajar</button>
+                <button id="btn-mode-2" class="mode-tab" onclick="setMode(2)">Mode 2: Mandiri</button>
+            </div>
+
+            <!-- Panel Mode 1: Belajar (Beginner Method) -->
+            <div id="panel-mode-1" class="panel-mode">
+                <div class="section-title">Panduan Beginner Method</div>
+                <p class="guide-title" id="guide-title">Langkah 1: Bunga Daisy</p>
+                <p class="guide-desc" id="guide-desc">Tujuan: Buat tanda '+' putih dengan pusat kuning di atas. Cari tepi (edge) putih dan putar ke layer atas sehingga mengelilingi center kuning.</p>
+                <div class="guide-controls">
+                    <button onclick="prevGuide()">← Prev</button>
+                    <button onclick="nextGuide()">Next →</button>
+                </div>
+            </div>
+
+            <!-- Panel Mode 2: Mandiri (Timer & Counter) -->
+            <div id="panel-mode-2" class="panel-mode" style="display: none;">
+                <div class="section-title">Statistik Pemecahan (Solve)</div>
+                <div class="stats-box">
+                    <div>Waktu: <span id="timer-display">00:00</span></div>
+                    <div>Langkah: <span id="move-counter">0</span></div>
+                </div>
+            </div>
+
+            <button class="action-btn" onclick="scrambleCube()">Scramble (Acak)</button>
+            <div class="history-controls">
+                <button type="button" onclick="undoMove()" aria-label="Undo gerakan terakhir">Undo</button>
+                <button type="button" onclick="redoMove()" aria-label="Ulangi gerakan yang dibatalkan">Redo</button>
+            </div>
+            <button class="action-btn" style="background-color: #51cf66;" onclick="resetCube()">Reset Rubik</button>
+
+            <div class="section-title" style="margin-top: 15px;">Rumus Gerakan (Notation)</div>
+            <div class="grid-moves">
+                <button onclick="rotateMove('U')">U</button>
+                <button onclick="rotateMove('UPrime')">U'</button>
+                <button onclick="rotateMove('D')">D</button>
+                <button onclick="rotateMove('DPrime')">D'</button>
+                
+                <button onclick="rotateMove('R')">R</button>
+                <button onclick="rotateMove('RPrime')">R'</button>
+                <button onclick="rotateMove('L')">L</button>
+                <button onclick="rotateMove('LPrime')">L'</button>
+                
+                <button onclick="rotateMove('F')">F</button>
+                <button onclick="rotateMove('FPrime')">F'</button>
+                <button onclick="rotateMove('B')">B</button>
+                <button onclick="rotateMove('BPrime')">B'</button>
+            </div>
+
+            <div class="section-title">Kontrol Kamera POV</div>
+            <button class="camera-btn" onclick="resetCamera()">Reset Posisi Kamera</button>
+
+            <div class="instruction-box">
+                <b>Panduan Kontrol:</b>
+                <ul style="margin: 5px 0 0 -15px; padding-left: 15px;">
+                    <li><b>Putar Kamera:</b> Klik Kanan + Geser (Drag).</li>
+                    <li><b>Putar Rubik:</b> Klik Kiri pada stiker, lalu geser.</li>
+                    <li><b>Timer:</b> Berjalan otomatis di Mode 2 sesudah Rubik diacak.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
